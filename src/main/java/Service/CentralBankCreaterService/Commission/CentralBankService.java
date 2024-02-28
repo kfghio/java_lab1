@@ -7,7 +7,9 @@ import Model.Enums.AccountType;
 import Model.Other.DatesCommission;
 import Model.Procent.Commission;
 import Model.Transaction.Transaction;
+import lombok.Getter;
 
+@Getter
 public class CentralBankService {
 
     private final CentralBank centralBank;
@@ -26,7 +28,7 @@ public class CentralBankService {
         transaction.getAimAccount().setMoneySum(transaction.getAimAccount().getMoneySum() + transaction.getMoney() );
     }
 
-    void validation(int days,Account account, CommercialBank bank ){
+    public void validation(int days,Account account, CommercialBank bank ){
         double moneyResult;
         int monthsNumber = days / DatesCommission.month;
 

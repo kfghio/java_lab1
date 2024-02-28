@@ -1,6 +1,7 @@
 package Entity.Clients;
 
 import Model.Enums.StatusType;
+import Model.Notice.ClientNotice;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Client {
     private String emailAdress;
     private int passport;
     private StatusType statusType;
+    private List<ClientNotice> clientNotices;
 
     public Client(int clientID,@NonNull String name, @NonNull String surname, String emailAdress, int passport){
         this.clientID =  clientID;
@@ -26,14 +28,19 @@ public class Client {
         this.surname = surname;
         this.emailAdress = emailAdress;
         this.passport = passport;
+        clientNotices = new ArrayList<>();
         validation();
     }
 
-    void validation(){
+    public void validation(){
         if(this.emailAdress == null || this.passport == 0)
             statusType = StatusType.QUESTIONABLE;
         else
             statusType = StatusType.NOTQUESTIONABLE;
+    }
+
+    public void update(ClientNotice clientNotice){
+        clientNotices.add(clientNotice);
     }
 
 
