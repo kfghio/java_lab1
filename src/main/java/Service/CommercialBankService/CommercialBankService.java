@@ -22,22 +22,41 @@ public class CommercialBankService {
     private final CommercialBank bank;
     private final Map<TransactionType, Transaction> map = new HashMap<>();
 
+    /**
+     * @param commercialBank
+     */
     public CommercialBankService(CommercialBank commercialBank){
         this.bank = commercialBank;
     }
 
+    /**
+     * Adding an account to the current bank
+     * @param account Existing account
+     */
     public void createAccount(Account account){
         bank.getAccounts().add(account);
     }
 
+    /**
+     * Adding a client to the current bank
+     * @param client Existing client
+     */
     public void createClient(Client client){
         bank.getUsers().add(client);
     }
 
+    /**
+     * Adding a commission(percent) to the current bank
+     * @param commission Existing commission(percent)
+     */
     public void createCommission(Commission commission){
         bank.getCommissions().add(commission);
     }
 
+    /**
+     * Transaction Processing
+     * @param transaction Existing pending transaction
+     */
     public void createTransaction(Transaction transaction){
         Client client = bank.getUsers().stream().filter(client1 -> client1.getClientID() == transaction.getAccount().getUserID()).findFirst().get();
 

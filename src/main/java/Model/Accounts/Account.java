@@ -13,6 +13,12 @@ public class Account {
     private double moneySum;
     private AccountType accountType;
 
+    /**
+     * @param accountID Account ID
+     * @param userID User ID that links the client and account
+     * @param moneySum Amount on account
+     * @param accountType What type of account: deposit, credit, debit
+     */
     public Account(int accountID, int userID, double moneySum, AccountType accountType) {
         this.accountID = accountID;
         this.userID = userID;

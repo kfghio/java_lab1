@@ -23,6 +23,12 @@ public class CommercialBank {
     private double quastionableLimit = Limits.questionableLimit;
     private final List<BankNotice> notices = new ArrayList<>();
 
+    /**
+     * @param bankID The ID of bank that was created
+     * @param creaditLimit The amount below which the client cannot go into minus
+     * @param quastionableLimit The amount above which the dubious client cannot carry out transactions
+     * @param subCentralBank Subscribe to central bank notifications
+     */
     public CommercialBank(int bankID, double creaditLimit, double quastionableLimit, SubCentralBank subCentralBank) {
         this.bankID = bankID;
         this.creaditLimit = creaditLimit;

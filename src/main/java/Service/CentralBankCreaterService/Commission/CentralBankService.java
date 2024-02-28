@@ -15,6 +15,10 @@ public class CentralBankService {
     private final CentralBank centralBank;
     private double money;
 
+    /**
+     * central bank sevice initialization
+     * @param centralBank
+     */
     public CentralBankService(CentralBank centralBank) {
         this.centralBank = centralBank;
     }
@@ -23,11 +27,23 @@ public class CentralBankService {
         centralBank.getCommercialBanks().add(commercialBank);
     }
 
+    /**
+     * the method provides a transaction between accounts from different banks (transaction between banks)
+     * @param transaction
+     * @param bank
+     * @param aimbank
+     */
     public void bankWithBankTransaction(Transaction transaction, CommercialBank bank, CommercialBank aimbank ){
         transaction.getAccount().setMoneySum(transaction.getAccount().getMoneySum() - transaction.getMoney());
         transaction.getAimAccount().setMoneySum(transaction.getAimAccount().getMoneySum() + transaction.getMoney() );
     }
 
+    /**
+     * the method skips days and calculates account changes
+     * @param days
+     * @param account
+     * @param bank
+     */
     public void validation(int days,Account account, CommercialBank bank ){
         double moneyResult;
         int monthsNumber = days / DatesCommission.month;

@@ -22,6 +22,14 @@ public class Client {
     private StatusType statusType;
     private List<ClientNotice> clientNotices;
 
+    /**
+     * Initializes the client and validates the status
+     * @param clientID Client's ID
+     * @param name Client's name
+     * @param surname Client's surname
+     * @param emailAdress Client's adress
+     * @param passport Client's passport numbers
+     */
     public Client(int clientID,@NonNull String name, @NonNull String surname, String emailAdress, int passport){
         this.clientID =  clientID;
         this.name = name;
@@ -32,6 +40,9 @@ public class Client {
         validation();
     }
 
+    /**
+     * Checks the initialized data and sets the status to the client
+     */
     public void validation(){
         if(this.emailAdress == null || this.passport == 0)
             statusType = StatusType.QUESTIONABLE;
@@ -39,6 +50,10 @@ public class Client {
             statusType = StatusType.NOTQUESTIONABLE;
     }
 
+    /**
+     * Adds a notification
+     * @param clientNotice Notification
+     */
     public void update(ClientNotice clientNotice){
         clientNotices.add(clientNotice);
     }
