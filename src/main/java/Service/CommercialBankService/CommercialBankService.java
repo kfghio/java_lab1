@@ -6,6 +6,7 @@ import Commands.TransferCommand;
 import Entity.Clients.Client;
 import Model.Accounts.Account;
 import Model.Banks.CommercialBank;
+import Model.Enums.AccountType;
 import Model.Enums.StatusType;
 import Model.Enums.TransactionType;
 import Model.Procent.Commission;
@@ -37,21 +38,24 @@ public class CommercialBankService {
         bank.getCommissions().add(commission);
     }
 
-    public Transaction createTransaction(Transaction transaction){
+    public void createTransaction(Transaction transaction){
         Client client = bank.getUsers().stream().filter(client1 -> client1.getClientID() == transaction.getAccount().getUserID()).findFirst().get();
 
         if (client.getStatusType() == StatusType.QUESTIONABLE)
             questionableLimit = bank.getQuastionableLimit();
+        else if (transaction.getAccount().getAccountType() == AccountType.CREDIT)
+            questionableLimit = bank.getCreaditLimit();
         else
             questionableLimit = Double.MAX_VALUE;
 
-        map.put(TransactionType.TRANSFER, new TransferCommand(transaction).execute(bank.getCreaditLimit()));
+        if(transaction.getTransactionType() == TransactionType.TRANSFER)
+            map.put(TransactionType.TRANSFER, new TransferCommand(transaction).execute(questionableLimit));
+        if(transaction.getTransactionType() == TransactionType.REPLENISHMENT)
+            map.put(TransactionType.REPLENISHMENT, new AddCommand(transaction).execute(questionableLimit));
+        if(transaction.getTransactionType() == TransactionType.WITHDRAW)
+            map.put(TransactionType.WITHDRAW, new GettingCommand(transaction).execute(bank.getCreaditLimit()));
 
-        map.put(TransactionType.REPLENISHMENT, new AddCommand(transaction).execute(questionableLimit));
-
-        map.put(TransactionType.WITHDRAW, new GettingCommand(transaction).execute(questionableLimit));
-
-        return map.get(transaction.getTransactionType());
+        map.get(transaction.getTransactionType());
     }
 
 

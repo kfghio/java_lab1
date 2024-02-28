@@ -2,11 +2,13 @@ package Model.Subs;
 
 import Model.Banks.CommercialBank;
 import Model.Notice.BankNotice;
+import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class SubCentralBank {
     @NonNull
     private BankNotice bankNotice;
