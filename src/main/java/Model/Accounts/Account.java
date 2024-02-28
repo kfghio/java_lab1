@@ -6,9 +6,9 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Account {
     private int accountID;
+    private double moneySum;
     private AccountType accountType;
 }
